@@ -1,5 +1,12 @@
-<%- include('header') %>
+<%- include('header')%>
 
-<h1>Convert my money </h1>
+    <form class="formConvert" method="GET" action="/cotacao">
+        <div class="form-group">
+            <input name="quotation" class="form-control" placeholder="Exchange rate - Dolar">
+            <input name="amount" class="form-control" placeholder="Dollar amount">
+        </div> 
+        <button type="submit" class="btn btn-primary form-control"><b>Convert</b></button> 
+          
+    </form>
 
-<%- include('footer') %>
+<%- include('footer')%>

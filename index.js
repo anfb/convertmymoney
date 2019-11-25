@@ -11,6 +11,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //HTTP Method
 app.get('/', (req, res) => res.render('home') );
+app.get('/cotacao', (req, res) => res.render('cotacao'));
 
 //port
 app.listen(3333, err =>{
