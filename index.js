@@ -12,15 +12,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //HTTP Method
 app.get('/', (req, res) => res.render('home') );
-app.get('/cotacao', (req, res) => {
+app.get('/cotacao', (req, res) => { 
     const {quotation, amount} = req.query;
-    const _convert = convert.convert(quotation, amount);
-    res.render('cotacao', {
-        quotation: convert.toMoney(quotation),
-        amount: convert.toMoney(amount),
-        _convert: convert.toMoney(_convert)
-    });
-
+    if(quotation && amount){
+        const _convert = convert.convert(quotation, amount);
+        res.render('cotacao', {
+            error: false,
+            quotation: convert.toMoney(quotation),
+            amount: convert.toMoney(amount),
+            _convert: convert.toMoney(_convert)
+        });
+    }else{
+        res.render('cotacao', {
+            error: 'Invalid Value'
+        });
+    }
 });
 
 //port
