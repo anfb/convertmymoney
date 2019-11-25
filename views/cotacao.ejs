@@ -1,0 +1,20 @@
+<%- include('header')%>  
+    <div class="container"> 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Quotation</th>
+                    <th>Value in Dollar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><%= amount %></td>
+                    <td><%= quotation %></td>
+                    <td><%= _convert %></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<%- include('footer')%>

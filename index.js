@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const convert = require('./lib/convert');
 
 //Set views
 app.set('view engine', 'ejs');
@@ -11,7 +12,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //HTTP Method
 app.get('/', (req, res) => res.render('home') );
-app.get('/cotacao', (req, res) => res.render('cotacao'));
+app.get('/cotacao', (req, res) => {
+    const {quotation, amount} = req.query;
+    const _convert = convert.convert(quotation, amount);
+    res.render('cotacao', {
+        quotation: convert.toMoney(quotation),
+        amount: convert.toMoney(amount),
+        _convert: convert.toMoney(_convert)
+    });
+
+});
 
 //port
 app.listen(3333, err =>{

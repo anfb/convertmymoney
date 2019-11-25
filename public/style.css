@@ -16,3 +16,9 @@ button{
     margin-top: 20px;
     padding: 10px;
 }
+.container{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+}
