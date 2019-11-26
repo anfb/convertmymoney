@@ -14,19 +14,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => res.render('home') );
 app.get('/cotacao', (req, res) => { 
     const {quotation, amount} = req.query;
-    if(quotation && amount){
-        const _convert = convert.convert(quotation, amount);
-        res.render('cotacao', {
-            error: false,
-            quotation: convert.toMoney(quotation),
-            amount: convert.toMoney(amount),
-            _convert: convert.toMoney(_convert)
-        });
+    if(quotation>0 && amount>0){
+        if( quotation && amount){
+            const _convert = convert.convert(quotation, amount);
+            res.render('cotacao', {
+                error: false,
+                quotation: convert.toMoney(quotation),
+                amount: convert.toMoney(amount),
+                _convert: convert.toMoney(_convert)
+            });
+        }else{
+            res.render('cotacao', {
+                error: 'Invalid Value'
+            });
+        }
     }else{
         res.render('cotacao', {
-            error: 'Invalid Value'
+            error: 'Please, type value greater than 0!'
         });
     }
+
+
+    
 });
 
 //port
