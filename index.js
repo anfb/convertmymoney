@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const convert = require('./lib/convert');
+const apiBCB = require('./lib/api.bcb')
 
 //Set views
 app.set('view engine', 'ejs');
@@ -11,7 +12,11 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //HTTP Method
-app.get('/', (req, res) => res.render('home') );
+app.get('/', async (req, res) => {
+    const cotacao = await apiBCB.getCotacao();
+    res.render('home', {cotacao}) 
+});
+
 app.get('/cotacao', (req, res) => { 
     const {quotation, amount} = req.query;
     if(quotation>0 && amount>0){
